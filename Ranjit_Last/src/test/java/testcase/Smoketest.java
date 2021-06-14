@@ -675,6 +675,8 @@ public class Smoketest extends Baseclass {
 		Report.Report_Sidemenu();
 		Report.Job_Report();
 		Report.SLA_Performance_Report();
+		
+		//test
 	}
 
 	
