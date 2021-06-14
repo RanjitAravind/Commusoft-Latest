@@ -374,6 +374,7 @@ public class Smoketest extends Baseclass {
 	public void PO() throws InterruptedException
 	{
 		Customer customer = new Customer(driver);
+		
 		customer.Add_Customer();
 		Thread.sleep(5000);
 		 // get the code from Customer page using driver inside the Wrapper
@@ -678,7 +679,15 @@ public class Smoketest extends Baseclass {
 		
 		//test
 	}
+	
+	
+	
+	
 
+	@Test(priority=31)
+	public void Ranjittest() throws InterruptedException
+	{
+	}
 	
 
 }
