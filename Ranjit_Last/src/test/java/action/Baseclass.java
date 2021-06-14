@@ -5,9 +5,11 @@ import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
@@ -32,26 +34,52 @@ public class Baseclass extends Wrapper {
 	public ExtentReports report;
 	public ExtentTest logger;
 	
-	@BeforeSuite
+	
+//	public static ExtentHtmlReporter htmlReporter;
+//	public static ExtentReports extent;
+//	public static ExtentTest logger;
+
+	
+	
+	
+	@BeforeSuite(alwaysRun = true)
 	public void initial() throws IOException
 	{
-		sheet = new Excelsheetdata();
-		config = new Config();
+		
 		ExtentHtmlReporter extent = new ExtentHtmlReporter(new File("./Reports/Live_SmokeTest_Result " +System.currentTimeMillis()+  ".html"));
 		report = new ExtentReports();
 		report.attachReporter(extent);
 		logger = report.createTest("Smoke Test");
+		sheet = new Excelsheetdata();
+		config = new Config();
+		
+		
+//		htmlReporter = new ExtentHtmlReporter(new File("./Reports/Live_SmokeTest_Result " +System.currentTimeMillis()+  ".html"));
+//	    extent = new ExtentReports();
+//	    extent.attachReporter(htmlReporter);
+//
+//	    extent.setSystemInfo("OS", "Mac Sierra");
+//	    extent.setSystemInfo("Host Name", "Test");
+//	    extent.setSystemInfo("Environment", "QA");
+//	    extent.setSystemInfo("User Name", "Napendra Singh");
+//
+//	    htmlReporter.config().setChartVisibilityOnOpen(true);
+//	    htmlReporter.config().setDocumentTitle("Extent report");
+//	    htmlReporter.config().setReportName("Final Report");
+		
+	
 	}
 	
-	@BeforeTest
-	public void setup()
+	@BeforeTest(alwaysRun = true)
+	public void setup() throws IOException
 	{
+		
 		driver = Browsers.startapplication(driver, config.Browser(), config.URl());
 		
 		
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void teardown(ITestResult result) throws IOException
 	{
 		if(result.getStatus()==ITestResult.SUCCESS)
@@ -69,8 +97,13 @@ public class Baseclass extends Wrapper {
 		}else
 		{
 			logger.log(Status.SKIP, "Method been Skiped");
+			logger.skip(result.getThrowable());
 		}
-		report.flush();
+		
 	}
+	@AfterSuite
+	public void tearDown(){
+		report.flush();
+	   }
 
 }

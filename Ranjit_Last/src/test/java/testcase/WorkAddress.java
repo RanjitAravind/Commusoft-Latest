@@ -24,7 +24,7 @@ public class WorkAddress extends Baseclass {
 		Thread.sleep(15000);
 		homepage = driver.getCurrentUrl();
 	}
-	@Test(priority = 1)
+//	@Test(priority = 1)
 	public void Add_Customer() throws InterruptedException
 	{
 		Customer customer = new Customer(driver);
@@ -39,7 +39,7 @@ public class WorkAddress extends Baseclass {
 		Thread.sleep(20000);
 		customerpage = driver.getCurrentUrl();
 	}
-	@Test(priority = 2)
+//	@Test(priority = 2)
 	public void Workaddress_Add() throws InterruptedException
 	{
 		driver.get(customerpage);
@@ -52,7 +52,7 @@ public class WorkAddress extends Baseclass {
 		WA = driver.getCurrentUrl();
 		
 	}
-	@Test(priority = 3)
+//	@Test(priority = 3)
 	public void WA_Add_job_Prefinal() throws InterruptedException
 	{
 		driver.get(WA);
@@ -62,7 +62,7 @@ public class WorkAddress extends Baseclass {
 		job.JobDescription("PreFinal");
 		job.createjob();
 	}
-	@Test(priority = 4)
+//	@Test(priority = 4)
 	public void WA_Addpayment_job() throws InterruptedException
 	{
 		driver.get(WA);
@@ -92,7 +92,7 @@ public class WorkAddress extends Baseclass {
 		invoice.invoice_payment_amount();
 		invoice.invoice_paymeny_save();
 	}
-	@Test(priority = 5)
+//	@Test(priority = 5)
 	public void WA_Estimate_Accept() throws InterruptedException
 	{
 		driver.get(WA);

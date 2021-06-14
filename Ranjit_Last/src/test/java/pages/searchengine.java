@@ -79,5 +79,32 @@ public class searchengine extends Wrapper {
 		type("(//input[@type=\"text\"])[14]", name);  //input[@class="select2-input select2-focused"]
 		click("//span[@class=\"select2-match\"]");
 	}
+	public void searchboxsupplieredit_itemVAT(String name)
+	{
+		dclick("(//td[@class=\"overflow_handsontable select_icon\"])[4]");
+		clear("(//input[@type=\"text\"])[13]");
+		type("(//input[@type=\"text\"])[13]", name);  //input[@class="select2-input select2-focused"]
+		click("//span[@class=\"select2-match\"]");
+	}
+	public void searchboxsupplieredit_supplier_itemVAT(String name)
+	{
+		dclick("(//td[@class=\"overflow_handsontable select_icon\"])[3]");
+		clear("(//input[@type=\"text\"])[10]");
+		type("(//input[@type=\"text\"])[10]", name);  //input[@class="select2-input select2-focused"]
+		click("//span[@class=\"select2-match\"]");
+	}
+	public void searchbox_Job_parts(String name)
+	{
+		click("//a[@class=\"select2-choice select2-default\"]");
+		type("//input[@class=\"select2-input select2-focused\"]", name);  //input[@class="select2-input select2-focused"]
+		click("//span[@class='select2-match']");
+	}
+	public void searchboxsupplieredit_partVAT(String name)
+	{
+		dclick("//td[@class=\"overflow_handsontable select_icon current highlight\"]");
+		clear("(//input[@type=\"text\"])[10]");
+		type("(//input[@type=\"text\"])[10]", name);  //input[@class="select2-input select2-focused"]
+		click("//span[@class=\"select2-match\"]");
+	}
 
 }
