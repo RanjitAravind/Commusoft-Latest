@@ -1,5 +1,7 @@
 package testcase;
 
+import java.io.IOException;
+
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
@@ -392,10 +394,11 @@ public class Smoketest extends Baseclass {
 		Job.assert_Suppliervat();
 		Job.assert_suppliereditgrand();	
 	}
-	@Test(priority=21)
+	@Test(priority=22)
 	public void Supplier_Invoice() throws InterruptedException
 	{
 		driver.get(Supplierhomepage);
+		Thread.sleep(4000);
 		click("//a[text()='Add new invoice']");
 		Thread.sleep(3000);
 		type("//input[@check-exists='invoiceNumber']","55");
@@ -403,6 +406,31 @@ public class Smoketest extends Baseclass {
 		search.searchbox_supplier_parts("Parts");
 		search.searchbox_supplier_parts_nominalcode("Parts");
 		click("//span[@ng-hide='saving']");
+	}
+	@Test(priority = 23)
+	public  void Customer_Createcontact() throws InterruptedException
+	{
+		driver.get(customerpage);
+		Thread.sleep(3000);
+		
+		click("//span[text()='Contacts']");
+		Thread.sleep(2000);
+		
+		click("//a[text()='Add new contact']");
+		
+		type("#contact_name", "Aravind");
+		type("#contact_surname", "Reigns");
+		type("#contact_contactsemail_emailaddress","rara@yopmail.com");
+		
+		Thread.sleep(1000);
+		click("//span[@class='number-type-toggle ng-binding']");
+		
+		click("//li[text()='Mobile']");
+		type("$contact[contactstelephone][0][telephonenumber]", "9856325698");
+		click("//span[text()='Add phone number']");
+		
+		click("//span[text()='Add contact']");
+			
 	}
 	@Test (priority=27)
 	public void CustomerReports() throws InterruptedException
@@ -472,6 +500,17 @@ public class Smoketest extends Baseclass {
 		Report.Jobs_Report();
 		Report.Job1_Assertion();
 				
+		
+	}
+	@Test(priority = 32)
+	public  void SolarSearch() throws InterruptedException, IOException
+	{
+		type("#search-input","ranjit");
+		typeenter("#search-input");
+		Thread.sleep(3000);
+		click("(//a[@class='ng-scope ng-binding'])[1]");
+		
+		
 		
 	}
 	
