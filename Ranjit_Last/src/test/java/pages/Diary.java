@@ -62,6 +62,14 @@ public class Diary extends Wrapper {
 	{
 		click("(//td[@class=\"fc-widget-content\"])[10]");
 	}
+	public void Diary_Timing1()
+	{
+		click("(//td[@class=\"fc-widget-content\"])[11]");
+	}
+	public void Diary_Timing2()
+	{
+		click("(//td[@class=\"fc-widget-content\"])[12]");
+	}
 	public void Diary_Normal_EvenDescription()
 	{
 		type("//input[@name='description']", "Normal Event");
