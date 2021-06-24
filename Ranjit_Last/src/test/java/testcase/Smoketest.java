@@ -3,9 +3,14 @@ package testcase;
 import java.io.IOException;
 
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import action.Baseclass;
+import io.restassured.RestAssured;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import pages.CreateJob;
 import pages.Customer;
 import pages.Diary;
@@ -16,6 +21,7 @@ import pages.NotesandCommunication;
 import pages.Reporting;
 import pages.Supplier;
 import pages.searchengine;
+import utility.PageloadResponse;
 
 public class Smoketest extends Baseclass {
 	
@@ -432,7 +438,7 @@ public class Smoketest extends Baseclass {
 		click("//span[text()='Add contact']");
 			
 	}
-	@Test (priority=27)
+	@Test (priority=24)
 	public void CustomerReports() throws InterruptedException
 	{
 		
@@ -448,7 +454,7 @@ public class Smoketest extends Baseclass {
 			
 		
 	}
-	@Test (priority=28)
+	@Test (priority=25)
 	public void ServiceRemindersReports() throws InterruptedException
 	{
 		driver.get(homepage);
@@ -461,7 +467,7 @@ public class Smoketest extends Baseclass {
 		Report.ServiceReminder1_Assertion();
 			
 	}
-	@Test (priority = 29)
+	@Test (priority = 26)
 	public void SupplierReports() throws InterruptedException
 	{
 		driver.get(homepage);
@@ -474,7 +480,7 @@ public class Smoketest extends Baseclass {
 		Report.Supplier1_Assertion();
 				
 	}
-	@Test (priority=30)
+	@Test (priority=27)
 	public void EstimateReport() throws InterruptedException
 	{
 		driver.get(homepage);
@@ -485,10 +491,8 @@ public class Smoketest extends Baseclass {
 		Report.Estimate_Report();
 		Report.Estimates_Report();
 		Report.Estimate1_Assertion();
-			
-		
 	}
-	@Test(priority=31)
+	@Test(priority=28)
 	public void JobReport() throws InterruptedException
 	{
 		driver.get(homepage);
@@ -502,16 +506,31 @@ public class Smoketest extends Baseclass {
 				
 		
 	}
-	@Test(priority = 32)
-	public  void SolarSearch() throws InterruptedException, IOException
+	@Test(priority = 29)
+	public  void SolarSearch_pageresponse() throws InterruptedException, IOException
 	{
 		type("#search-input","ranjit");
 		typeenter("#search-input");
+		String url = driver.getCurrentUrl();
 		Thread.sleep(3000);
 		click("(//a[@class='ng-scope ng-binding'])[1]");
-		
-		
-		
+		PageloadResponse page = new PageloadResponse();
+		int a = page.httpResponseCodeViaGet(url);
+		System.out.println("Status:- " +a);
+		Assert.assertEquals(a, 200);
+	}
+	@Test(priority = 30)
+	void get_InvoiceNumber_API()
+	{
+		RestAssured.baseURI="https://stage2.commusoft.net/webservice_dev.php/api/v1";
+		RequestSpecification titlerequest = RestAssured.given();
+		//Response Object
+		Response resp = titlerequest.request(Method.GET,"/customers/customer/1284/jobs/1694/invoices?token=AsWoiK-X_Z73s61ja6xy2Q_vKI7Z7kvk3qcT9eNJi_xQXjyJsSXFDK7eQV36eZyavU7MYTQOZ0HqPE_9hX2_FQ");
+		String ResponseBody = resp.getBody().asString();
+		System.out.println("Response value" +ResponseBody);
+		int statuscode = resp.getStatusCode();
+		System.out.println("Status:- " +statuscode);
+		Assert.assertEquals(statuscode, 200);
 	}
 	
 
